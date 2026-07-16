@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 | Η σελίδα δεν βρέθηκε - Ήχος Εικόνα Χρήστος</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .err-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: var(--sp-5); }
+    .err-tile { max-width: 34rem; text-align: center; }
+    .err-code {
+      font-family: var(--font-mono);
+      font-size: clamp(3.5rem, 12vw, 6rem);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--clr-accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="err-wrap">
+    <div class="tile err-tile">
+      <p class="err-code">404</p>
+      <h1>Η σελίδα δεν βρέθηκε.</h1>
+      <p class="muted mt-4">Η διεύθυνση που ζητήσατε δεν υπάρχει ή έχει μετακινηθεί.</p>
+      <p class="muted" lang="en">The page you asked for doesn't exist or has moved.</p>
+      <div class="btn-row" style="justify-content: center;">
+        <a class="btn" href="index.html">Αρχική
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="en/index.html" lang="en" hreflang="en">Home (EN)</a>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/glass.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Photo placeholder: event sound coverage">
+  <rect width="800" height="600" fill="#17171a"/>
+  <path d="M0 300 h180 l20-40 20 76 20-60 20 44 20-22 h60 l20-56 20 100 20-80 20 50 20-25 h60 l20-35 20 65 20-50 20 30 h180" fill="none" stroke="#232329" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(352,252) scale(4)" fill="none" stroke="#ec0c0d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M11 5 6 9H3v6h3l5 4z"/>
+    <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+    <path d="M18.5 5.5a9 9 0 0 1 0 13"/>
+  </g>
+  <text x="744" y="72" text-anchor="end" font-family="Consolas, 'Cascadia Code', monospace" font-size="16" letter-spacing="3" fill="#8a8a94">PHOTO COMING SOON</text>
+  <rect x="56" y="512" width="14" height="14" fill="#ec0c0d"/>
+  <text x="86" y="525" font-family="Consolas, 'Cascadia Code', monospace" font-size="22" letter-spacing="4" fill="#bdbdc6">EVENT SOUND COVERAGE</text>
+</svg>

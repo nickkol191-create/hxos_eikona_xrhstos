@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Θέση φωτογραφίας: κεραίες και λήψη σήματος">
+  <rect width="800" height="600" fill="#17171a"/>
+  <path d="M0 300 h180 l20-40 20 76 20-60 20 44 20-22 h60 l20-56 20 100 20-80 20 50 20-25 h60 l20-35 20 65 20-50 20 30 h180" fill="none" stroke="#232329" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(352,252) scale(4)" fill="none" stroke="#ec0c0d" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 8.5V21"/>
+    <path d="M8.5 21h7"/>
+    <circle cx="12" cy="6" r="2"/>
+    <path d="M8.2 2.6a7 7 0 0 1 7.6 0"/>
+  </g>
+  <text x="744" y="72" text-anchor="end" font-family="Consolas, 'Cascadia Code', monospace" font-size="16" letter-spacing="3" fill="#8a8a94">ΦΩΤΟΓΡΑΦΙΑ ΣΥΝΤΟΜΑ</text>
+  <rect x="56" y="512" width="14" height="14" fill="#ec0c0d"/>
+  <text x="86" y="525" font-family="Consolas, 'Cascadia Code', monospace" font-size="22" letter-spacing="4" fill="#bdbdc6">ΚΕΡΑΙΕΣ &amp; ΣΗΜΑ</text>
+</svg>
