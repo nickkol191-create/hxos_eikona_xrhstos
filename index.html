@@ -10,7 +10,7 @@
   <meta property="og:locale" content="el_GR">
   <meta property="og:title" content="Ήχος Εικόνα Χρήστος - Ήχος, εικόνα &amp; ασφάλεια στη Θήβα">
   <meta property="og:description" content="Εγκαταστάσεις, ηχητικές καλύψεις, σέρβις, κεραίες &amp; δορυφορικά, CCTV, συναγερμοί και έξυπνα σπίτια στη Θήβα και τη Βοιωτία.">
-  <meta property="og:image" content="assets/logo.png"><!-- TODO: όταν ανέβει το site, βάλτε απόλυτο URL -->
+  <meta property="og:image" content="https://nickkol191-create.github.io/hxos_eikona_xrhstos/assets/logo.png">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
@@ -72,6 +72,7 @@
           <li><a href="index.html" aria-current="page">Αρχική</a></li>
           <li><a href="services.html">Υπηρεσίες</a></li>
           <li><a href="products.html">Προϊόντα</a></li>
+          <li><a href="gallery.html">Γκαλερί</a></li>
           <li><a class="nav-cta" href="contact.html">Επικοινωνία</a></li>
           <li><a class="lang-switch" href="en/index.html" lang="en" hreflang="en" aria-label="View this page in English">EN</a></li>
         </ul>
@@ -82,35 +83,28 @@
   <main id="main">
 
     <!-- ===== HERO ===== -->
-    <section class="hero container" aria-labelledby="hero-title">
-      <div class="bento">
-        <div class="tile tile-dark hero-main d12">
-          <p class="eyebrow">Προϊόντα · Εγκατάσταση · Υποστήριξη</p>
-          <h1 id="hero-title">Ό,τι χρειάζεται ο χώρος σας: τηλεοράσεις, ηχοσυστήματα, κάμερες και έξυπνες συσκευές.</h1>
-          <p class="lede">Προϊόντα διαλεγμένα για να εγκαθίστανται σωστά και να υποστηρίζονται για χρόνια.</p>
-          <div class="btn-row">
-            <a class="btn" href="products.html">Δείτε τα προϊόντα
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-            </a>
-          </div>
-          <svg class="wave" viewBox="0 0 620 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M0 30 h28 l7-16 7 30 7-24 7 18 7-9 h20 l7-22 7 40 7-32 7 20 7-10 h24 l7-14 7 26 7-20 7 12 h26 l7-26 7 44 7-34 7 22 7-11 h22 l7-18 7 30 7-22 7 12 h28 l7-15 7 26 7-19 7 10 h30 l7-24 7 40 7-30 7 16 h44"/>
-          </svg>
-        </div>
+    <section class="hero container hero-open" aria-labelledby="hero-title">
+      <h1 id="hero-title">Από το σαλόνι σας ως τη σκηνή, όλα στημένα σωστά</h1>
 
-
-        <div class="tile tile-dark d12 hero-ask">
-          <div class="hero-ask-main">
-            <span class="icon-box" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
-            </span>
-            <h2>Πριν αγοράσετε, ρωτήστε μας</h2>
-            <p>Σας προτείνουμε ό,τι ταιριάζει στον χώρο και στο μπάτζετ σας, με τιμή και διαθεσιμότητα, και σας το παραδίδουμε εγκατεστημένο.</p>
+          <div class="hero-carousel" role="group" aria-label="Φωτογραφίες από έργα μας, σύρετε για περιστροφή">
+            <div class="hc-ring">
+              <button class="hc-face" type="button" style="--i: 0" data-full="assets/photos/IMG_2570.JPEG"><img src="assets/photos/thumbs/IMG_2570.jpg" alt="Υπαίθρια οθόνη LED στημένη σε truss" width="720" height="540"></button>
+              <button class="hc-face" type="button" style="--i: 1" data-full="assets/photos/IMG_2572.JPEG"><img src="assets/photos/thumbs/IMG_2572.jpg" alt="Κονσόλα ήχου σε αίθουσα δεξιώσεων" width="540" height="720"></button>
+              <button class="hc-face" type="button" style="--i: 2" data-full="assets/photos/IMG_2584.JPEG"><img src="assets/photos/thumbs/IMG_2584.jpg" alt="Οθόνη προβολής σε υπαίθρια πολιτιστική εκδήλωση στη Θήβα" width="720" height="540"></button>
+              <button class="hc-face" type="button" style="--i: 3" data-full="assets/photos/IMG_2581.JPEG"><img src="assets/photos/thumbs/IMG_2581.jpg" alt="Σύστημα συναγερμού Ajax σε λευκό χρώμα με εξωτερική σειρήνα" width="540" height="720"></button>
+              <button class="hc-face" type="button" style="--i: 4" data-full="assets/photos/IMG_2571.JPEG"><img src="assets/photos/thumbs/IMG_2571.jpg" alt="Υπαίθρια οθόνη LED με ηχεία line array σε εκδήλωση" width="720" height="540"></button>
+              <button class="hc-face" type="button" style="--i: 5" data-full="assets/photos/IMG_2583.JPEG"><img src="assets/photos/thumbs/IMG_2583.jpg" alt="DJ booth με ηχεία και φωτεινή επιγραφή Let's Party" width="540" height="720"></button>
+              <button class="hc-face" type="button" style="--i: 6" data-full="assets/photos/IMG_2568.JPEG"><img src="assets/photos/thumbs/IMG_2568.jpg" alt="Εγκατάσταση video wall σε αίθουσα εκδηλώσεων" width="720" height="540"></button>
+              <button class="hc-face" type="button" style="--i: 7" data-full="assets/photos/IMG_2576.JPEG"><img src="assets/photos/thumbs/IMG_2576.jpg" alt="Πύργοι truss με φωτισμό και οθόνη LED σε κλειστό γυμναστήριο" width="540" height="720"></button>
+              <button class="hc-face" type="button" style="--i: 8" data-full="assets/photos/IMG_2579.JPEG"><img src="assets/photos/thumbs/IMG_2579.jpg" alt="Στήσιμο πύργων truss για υπαίθρια εκδήλωση τη νύχτα" width="540" height="720"></button>
+              <button class="hc-face" type="button" style="--i: 9" data-full="assets/photos/IMG_2577.JPEG"><img src="assets/photos/thumbs/IMG_2577.jpg" alt="Φωτισμός, ήχος και DJ set σε αθλητική διοργάνωση με ρινγκ" width="720" height="540"></button>
+            </div>
           </div>
-          <a class="btn" href="contact.html">Επικοινωνήστε μαζί μας
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-          </a>
-        </div>
+
+      <div class="hero-cta">
+        <a class="btn" href="contact.html">Επικοινωνήστε μαζί μας
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </a>
       </div>
     </section>
 
@@ -260,6 +254,14 @@
       </div>
     </section>
 
+    <!-- overlay πλήρους μεγέθους για το carousel του hero -->
+    <div class="hc-overlay" role="dialog" aria-modal="true" aria-label="Φωτογραφία σε πλήρες μέγεθος" hidden>
+      <img src="" alt="">
+      <button class="lb-close" type="button" aria-label="Κλείσιμο">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+      </button>
+    </div>
+
   </main>
 
   <footer class="site-footer">
@@ -275,6 +277,7 @@
             <li><a href="index.html">Αρχική</a></li>
             <li><a href="services.html">Υπηρεσίες</a></li>
             <li><a href="products.html">Προϊόντα</a></li>
+            <li><a href="gallery.html">Γκαλερί</a></li>
             <li><a href="contact.html">Επικοινωνία</a></li>
           </ul>
         </nav>
@@ -313,5 +316,6 @@
     </div>
   </footer>
   <script src="assets/js/glass.js" defer></script>
+  <script src="assets/js/hero-carousel.js" defer></script>
 </body>
 </html>

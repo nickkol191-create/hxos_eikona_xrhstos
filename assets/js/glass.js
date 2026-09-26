@@ -41,7 +41,7 @@
   window.addEventListener('resize', sync);
 })();
 
-/* Error toast — deliberately picky so it never cries wolf:
+/* Error toast - deliberately picky so it never cries wolf:
    - ignores everything once the user is navigating away (cancelled loads
      fire bogus "error" events on every page change)
    - ignores errors coming from browser extensions or third-party scripts
@@ -49,9 +49,17 @@
 (function () {
   var shown = false;
   var leaving = false;
+  var rearm = null;
 
   window.addEventListener('pagehide', function () { leaving = true; });
-  window.addEventListener('beforeunload', function () { leaving = true; });
+  window.addEventListener('beforeunload', function () {
+    leaving = true;
+    /* αν η πλοήγηση ακυρωθεί (π.χ. tel:/mailto:) η σελίδα μένει ζωντανή */
+    clearTimeout(rearm);
+    rearm = setTimeout(function () { leaving = false; }, 3000);
+  });
+  /* το pageshow πιάνει και την επιστροφή από το back/forward cache */
+  window.addEventListener('pageshow', function () { leaving = false; });
 
   function toast() {
     if (shown || !document.body) return;

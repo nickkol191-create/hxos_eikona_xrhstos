@@ -1,8 +1,8 @@
 /* ============================================================
-   ΗΧΟΣ ΕΙΚΟΝΑ ΧΡΗΣΤΟΣ — styles.css
+   ΗΧΟΣ ΕΙΚΟΝΑ ΧΡΗΣΤΟΣ - styles.css
    Bento grid · professional / minimalist · mobile-first
    ------------------------------------------------------------
-   DESIGN TOKENS — swap in your own design-system values here.
+   DESIGN TOKENS - swap in your own design-system values here.
    ============================================================ */
 
 :root {
@@ -122,11 +122,6 @@ h3 { font-size: 1.22rem; }
 h4 { font-size: 1.05rem; }
 
 p  { max-width: 65ch; }
-
-.lede {
-  font-size: 1.1rem;
-  color: var(--clr-ink-soft);
-}
 
 .eyebrow {
   display: inline-flex;
@@ -481,32 +476,14 @@ a.tile:hover,
 
 .chip:hover { border-color: var(--clr-accent); color: var(--clr-accent-deep); }
 
-/* ---- Decorative waveform ------------------------------------- */
-
-.wave {
-  width: 100%;
-  height: auto;
-  color: var(--clr-accent);
-  opacity: 0.85;
-  margin-top: var(--sp-5);
-}
-
-.tile-dark .wave { color: var(--clr-accent); }
-
 /* ============================================================
    HERO
    ============================================================ */
 
 .hero {
-  padding-top: clamp(1.5rem, 4vw, 3rem);
-  padding-bottom: clamp(2rem, 6vw, 4rem);
+  padding-top: clamp(3rem, 7vw, 5.5rem);
+  padding-bottom: clamp(3rem, 8vw, 6rem);
 }
-
-.hero-main { display: flex; flex-direction: column; justify-content: center; }
-
-.hero-main h1 { margin-bottom: var(--sp-4); }
-
-.hero-main .lede { max-width: 46ch; }
 
 .page-hero { padding-top: clamp(1.5rem, 4vw, 3rem); }
 
@@ -713,48 +690,6 @@ a.tile:hover,
 }
 
 .quote-tile figcaption b { color: var(--clr-ink); }
-
-/* ============================================================
-   GALLERY
-   ============================================================ */
-
-.gallery-grid {
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 640px) {
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (min-width: 1000px) {
-  .gallery-grid { grid-template-columns: repeat(4, 1fr); }
-  .g-wide { grid-column: span 2; }
-}
-
-.gallery-grid figure {
-  background: var(--clr-surface);
-  border: var(--border);
-  border-radius: var(--rad-md);
-  overflow: hidden;
-  transition: border-color var(--speed), box-shadow var(--speed);
-}
-
-.gallery-grid figure:hover { border-color: var(--clr-ink); box-shadow: var(--shadow-soft); }
-
-.gallery-grid img {
-  width: 100%;
-  height: 230px;
-  object-fit: cover;
-}
-
-.gallery-grid figcaption {
-  padding: var(--sp-3) var(--sp-4);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--clr-ink-soft);
-}
 
 /* ============================================================
    FORMS
@@ -1054,7 +989,6 @@ body::before {
 
 .faq details,
 .timeline li,
-.gallery-grid figure,
 .table-scroll { background: rgba(255, 255, 255, 0.72); }
 
 .chip { background: rgba(255, 255, 255, 0.75); }
@@ -1374,58 +1308,8 @@ a.tile:hover,
 
 .tile-vcenter .icon-box { margin-bottom: 0; }
 
-/* homepage hero: extra air between the copy and the buttons */
-.hero-main .btn-row { margin-top: var(--sp-8); }
-
 /* red buttons inside dark tiles keep their distance from the copy */
 .tile-dark .btn { margin-top: var(--sp-5); }
-
-/* «Πριν αγοράσετε» tab: red CTA button (right side on PC) */
-.hero-ask > .btn {
-  margin-top: var(--sp-5);
-  align-self: flex-start;
-}
-
-@media (min-width: 1000px) {
-  .hero-ask > .btn {
-    margin-top: 0;
-    align-self: center;
-    flex-shrink: 0;
-  }
-}
-
-/* «Πριν αγοράσετε» tab: phones inline on small screens... */
-.hero-phones { margin-top: var(--sp-4); }
-
-.hero-phones strong {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55em;
-}
-
-/* ...and stacked on the right with the dot in between on PC */
-@media (min-width: 1000px) {
-  .hero-ask {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-7);
-  }
-
-  .hero-ask-main { flex: 1; }
-
-  .hero-ask-main > p { margin-bottom: 0; }
-
-  .hero-phones { margin: 0; flex-shrink: 0; }
-
-  .hero-phones strong {
-    flex-direction: column;
-    gap: 6px;
-    text-align: center;
-  }
-
-  .hero-phones a { font-size: 1.3rem; }
-}
 
 /* discreet photo attribution line (products page) */
 .photo-credits {
@@ -1499,4 +1383,434 @@ a.tile:hover,
   font-size: 1rem;
   cursor: pointer;
   line-height: 1;
+}
+
+/* ============================================================
+   GALLERY: φάκελοι τύπου iCloud, άλμπουμ και lightbox
+   ============================================================ */
+
+/* ---- folder grid ---------------------------------------------------- */
+
+.folder-grid {
+  list-style: none;
+  padding: 0;
+  margin: var(--sp-6) 0 0;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 640px) {
+  .folder-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .folder-grid { grid-template-columns: repeat(5, 1fr); gap: var(--sp-5); }
+}
+
+.folder {
+  display: block;
+  text-decoration: none;
+  color: var(--clr-ink);
+  background: rgba(255, 255, 255, 0.68);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  backdrop-filter: blur(14px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--rad-lg);
+  padding: var(--sp-3);
+  box-shadow: var(--shadow-soft);
+  transition: translate var(--speed), box-shadow var(--speed);
+}
+
+.folder:hover {
+  color: var(--clr-ink);
+  translate: 0 -4px;
+  box-shadow: 0 6px 14px rgba(20, 20, 23, 0.16), 0 22px 44px rgba(20, 20, 23, 0.18);
+}
+
+.folder:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.folder-cover {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 6px;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.folder-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--rad-sm);
+  transition: scale var(--speed);
+}
+
+.folder:hover .folder-cover img { scale: 1.06; }
+
+.folder-cover .cover-empty {
+  border-radius: var(--rad-sm);
+  background: rgba(20, 20, 23, 0.05);
+  border: 1px dashed rgba(20, 20, 23, 0.14);
+}
+
+.folder-name {
+  display: block;
+  margin-top: var(--sp-3);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.folder-count {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  color: var(--clr-ink-soft);
+}
+
+/* ---- album overlay (ανοίγει με :target, δουλεύει και χωρίς JS) ------ */
+
+.album {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(24, 10, 10, 0.6);
+  padding: clamp(0.75rem, 3vw, 2.5rem);
+}
+
+.album:target { display: block; }
+
+/* το άλμπουμ μένει ορατό πίσω από το ανοιχτό lightbox (gallery.js),
+   ώστε να μη χάνει το scroll του όταν κλείνει η φωτογραφία */
+.album.album-behind { display: block; }
+
+.album:focus { outline: none; }
+
+@media (min-width: 640px) {
+  .album {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+.album-panel {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--rad-lg);
+  padding: clamp(1.1rem, 3vw, 2rem);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+.album-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
+}
+
+.album-head > div { margin-right: auto; }
+
+.album-head h2 {
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  line-height: 1.15;
+}
+
+.album-count-line {
+  margin-top: var(--sp-1);
+  color: var(--clr-ink-soft);
+  font-size: 0.95rem;
+}
+
+.album-close {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--clr-dark);
+  color: #fff;
+  transition: background-color var(--speed);
+}
+
+.album-close:hover { background: var(--clr-accent); color: #fff; }
+
+.album-close:focus-visible {
+  outline: 3px solid var(--clr-accent-deep);
+  outline-offset: 3px;
+}
+
+.album-close svg { width: 20px; height: 20px; }
+
+.album-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 640px) {
+  .album-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.album-grid a {
+  display: block;
+  border-radius: var(--rad-md);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: rgba(20, 20, 23, 0.06);
+}
+
+.album-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: scale var(--speed);
+}
+
+.album-grid a:hover img { scale: 1.05; }
+
+.album-grid a:focus-visible {
+  outline: 3px solid var(--clr-accent-deep);
+  outline-offset: 3px;
+}
+
+/* ---- lightbox (πλήρες μέγεθος φωτογραφίας) -------------------------- */
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(14, 8, 8, 0.94);
+  margin: 0;
+}
+
+.lightbox:target {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox:focus { outline: none; }
+
+.lightbox img {
+  max-width: 94vw;
+  max-height: 84vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--rad-md);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+}
+
+@media (min-width: 640px) {
+  .lightbox img { max-width: calc(100vw - 150px); }
+}
+
+.lb-close,
+.lb-prev,
+.lb-next {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  transition: background-color var(--speed);
+}
+
+.lb-close:hover,
+.lb-prev:hover,
+.lb-next:hover { background: var(--clr-accent); color: #fff; }
+
+.lb-close:focus-visible,
+.lb-prev:focus-visible,
+.lb-next:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.lb-close { top: 16px; right: 16px; }
+
+.lb-prev,
+.lb-next {
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.lb-prev { left: 10px; }
+.lb-next { right: 10px; }
+
+.lb-close svg,
+.lb-prev svg,
+.lb-next svg { width: 22px; height: 22px; }
+
+/* ---- κλείδωμα scroll όταν είναι ανοιχτό overlay (μέσω gallery.js) --- */
+
+html.overlay-open { overflow: hidden; }
+
+/* ---- κινήσεις ------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .album:target .album-panel,
+  .album.album-behind .album-panel { animation: album-in 0.28s ease both; }
+  .lightbox:target img { animation: photo-in 0.24s ease both; }
+}
+
+/* στοιχειώδης συμπεριφορά inert για παλιότερους browsers */
+[inert] { pointer-events: none; }
+
+@keyframes album-in {
+  from { opacity: 0; translate: 0 14px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+@keyframes photo-in {
+  from { opacity: 0; scale: 0.965; }
+  to   { opacity: 1; scale: 1; }
+}
+
+/* ---- κινητά: χωρίς blur για ταχύτητα (όπως τα tiles) ---------------- */
+
+@media (max-width: 639.98px) {
+  .folder {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .album-panel { background: rgba(255, 255, 255, 0.96); }
+}
+
+/* ============================================================
+   HERO 3D CAROUSEL (αρχική σελίδα): κύλινδρος φωτογραφιών
+   που περιστρέφεται με σύρσιμο, το JS ρυθμίζει μόνο το --hc-rot
+   ============================================================ */
+
+/* hero χωρίς tile: τίτλος, φωτογραφίες και ένα κουμπί πάνω στο φόντο */
+.hero-open { text-align: center; }
+
+.hero-open h1 {
+  color: #fff;
+  font-size: clamp(2.1rem, 5.5vw, 3.4rem);
+  max-width: 58rem;
+  margin-inline: auto;
+}
+
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.hero-carousel {
+  --hc-radius: 175px;  /* 1100 / 2π */
+  --hc-face-w: 112px;  /* < 2 × radius × tan(18°), αλλιώς οι κάρτες τέμνονται */
+  position: relative;
+  height: clamp(230px, 42vw, 330px);
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+  perspective: 1000px;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hero-carousel:active { cursor: grabbing; }
+
+@media (min-width: 640px) {
+  .hero-carousel {
+    --hc-radius: 287px;  /* 1800 / 2π */
+    --hc-face-w: 180px;
+  }
+}
+
+/* PC: ο κύκλος ανοίγει πιο φαρδιά, οι φωτογραφίες μένουν ίδιο μέγεθος
+   (το perspective μεγαλώνει μαζί με την ακτίνα ώστε η μπροστινή κάρτα
+   να προβάλλεται όσο και πριν) */
+@media (min-width: 1000px) {
+  .hero-carousel {
+    --hc-radius: 380px;
+    --hc-face-w: 180px;
+    perspective: 1330px;
+  }
+}
+
+.hc-ring {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  transform: rotate3d(0, 1, 0, var(--hc-rot, 0deg));
+  will-change: transform;
+}
+
+/* 10 όψεις, 36 μοίρες η καθεμία (--i: 0..9 στο HTML) */
+.hc-face {
+  position: absolute;
+  width: var(--hc-face-w);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transform: rotateY(calc(var(--i) * 36deg)) translateZ(var(--hc-radius));
+}
+
+.hc-face img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--rad-md);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.hc-face:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.hc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 8, 8, 0.94);
+}
+
+.hc-overlay[hidden] { display: none; }
+
+.hc-overlay img {
+  max-width: 94vw;
+  max-height: 84vh;
+  border-radius: var(--rad-md);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+}
+
+.hc-overlay .lb-close { cursor: pointer; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hc-overlay:not([hidden]) img { animation: photo-in 0.24s ease both; }
 }
