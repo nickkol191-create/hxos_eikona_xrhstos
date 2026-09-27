@@ -12,6 +12,8 @@
   }
 
   window.addEventListener('pointermove', function (e) {
+    /* μόνο ποντίκι: στα κινητά κάθε drag θα ζωγράφιζε ξανά όλο το φόντο */
+    if (e.pointerType && e.pointerType !== 'mouse') return;
     x = e.clientX;
     y = e.clientY;
     if (!raf) raf = requestAnimationFrame(apply);

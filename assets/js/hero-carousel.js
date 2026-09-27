@@ -39,6 +39,7 @@
   var visible = true;
   var rafId = null;
   var lastTick = 0;
+  var moveRaf = null;
 
   /* ό,τι μένει πίσω από το overlay γίνεται inert όσο αυτό είναι ανοιχτό */
   var pageChrome = [];
@@ -142,7 +143,13 @@
     if (vel > VEL_MAX) { vel = VEL_MAX; } else if (vel < -VEL_MAX) { vel = -VEL_MAX; }
     lastX = e.clientX;
     lastT = e.timeStamp;
-    render();
+    /* μία εγγραφή στυλ ανά καρέ, όσο πυκνά κι αν έρχονται τα pointermove */
+    if (moveRaf === null) {
+      moveRaf = window.requestAnimationFrame(function () {
+        moveRaf = null;
+        render();
+      });
+    }
   });
 
   function endDrag(e) {

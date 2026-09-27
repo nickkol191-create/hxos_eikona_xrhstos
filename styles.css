@@ -950,13 +950,34 @@ body { background: var(--glass-deep); }
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;   /* σταθερό στρώμα φόντου */
+  height: 100lvh;  /* δεν αλλάζει μέγεθος όταν κρύβεται η μπάρα διεύθυνσης */
   z-index: -1;
   background:
-    radial-gradient(900px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.05) 45%, transparent 70%),
     radial-gradient(1100px 750px at 12% 8%, rgba(255, 255, 255, 0.10), transparent 60%),
     radial-gradient(1000px 700px at 88% 92%, rgba(0, 0, 0, 0.30), transparent 65%),
     linear-gradient(160deg, #a30e12, var(--glass-mid) 45%, var(--glass-deep));
+}
+
+/* το φως που ακολουθεί τον κέρσορα: δικό του στρώμα που κινείται μόνο με
+   transform (στον compositor, χωρίς repaint), και μόνο όπου υπάρχει ποντίκι */
+@media (hover: hover) and (pointer: fine) {
+  body::after {
+    content: "";
+    position: fixed;
+    top: -900px;
+    left: -900px;
+    width: 1800px;
+    height: 1800px;
+    z-index: -1;
+    pointer-events: none;
+    transform: translate3d(var(--mx), var(--my), 0);
+    will-change: transform;
+    background: radial-gradient(circle 900px at center, rgba(255, 255, 255, 0.20), rgba(255, 255, 255, 0.05) 45%, transparent 70%);
+  }
 }
 
 /* ---- glassy surfaces ----------------------------------------- */
@@ -1065,6 +1086,14 @@ body::before {
 
   .nav-toggle svg { width: 26px; height: 26px; }
 
+  /* :focus πρώτα, ώστε παλιά Safari χωρίς :focus-visible να δείχνουν δαχτυλίδι */
+  .nav-toggle-box:focus + .nav-toggle {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+
+  .nav-toggle-box:focus:not(:focus-visible) + .nav-toggle { outline: none; }
+
   .nav-toggle-box:focus-visible + .nav-toggle {
     outline: 3px solid #fff;
     outline-offset: 3px;
@@ -1091,7 +1120,7 @@ body::before {
   }
 
   /* language switch sits lower, separated from the page links */
-  .site-nav li:has(.lang-switch) {
+  .site-nav .nav-lang {
     margin-top: var(--sp-5);
     padding-top: var(--sp-4);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -1127,10 +1156,8 @@ a.tile:hover,
 /* ---- footer ------------------------------------------------------ */
 
 .site-footer {
-  background: rgba(15, 15, 18, 0.92);
+  background: rgba(15, 15, 18, 0.93);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
 }
 
 .footer-logo {
@@ -1247,11 +1274,13 @@ a.tile:hover,
 }
 
 @media (max-width: 639.98px) {
-  .svc-card summary {
+  .svc-card summary { cursor: pointer; }
+
+  /* το flex ζει σε εσωτερικό span: παλιά WebKit αγνοούν το display στο summary */
+  .svc-card .svc-row {
     display: flex;
     align-items: center;
     gap: var(--sp-4);
-    cursor: pointer;
   }
 
   .svc-card summary .icon-box {
@@ -1278,6 +1307,14 @@ a.tile:hover,
   /* phones: skip the expensive backdrop blur so the fold-outs feel instant */
   .tile,
   .tile-notice {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* phones: sticky navbar without blur (το blur ξαναζωγραφίζεται σε κάθε
+     καρέ scroll στα αδύναμα κινητά), λίγο πιο αδιάφανο για ίδια αίσθηση */
+  .site-header {
+    background: rgba(15, 15, 18, 0.93);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
@@ -1360,7 +1397,7 @@ a.tile:hover,
   position: fixed;
   left: 50%;
   bottom: 24px;
-  translate: -50% 0;
+  transform: translateX(-50%);
   z-index: 100;
   display: flex;
   gap: var(--sp-4);
@@ -1479,6 +1516,10 @@ a.tile:hover,
 .album {
   display: none;
   position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   inset: 0;
   z-index: 80;
   overflow-y: auto;
@@ -1594,6 +1635,10 @@ a.tile:hover,
 .lightbox {
   display: none;
   position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   inset: 0;
   z-index: 90;
   background: rgba(14, 8, 8, 0.94);
@@ -1652,7 +1697,8 @@ a.tile:hover,
 .lb-prev,
 .lb-next {
   top: 50%;
-  translate: 0 -50%;
+  /* transform αντί για την ιδιότητα translate: δουλεύει και σε παλιά Safari */
+  transform: translateY(-50%);
 }
 
 .lb-prev { left: 10px; }
@@ -1753,8 +1799,20 @@ html.overlay-open { overflow: hidden; }
   }
 }
 
+/* πολύ στενές οθόνες: μικρότερος κύλινδρος, να μη βγαίνει οριζόντιο scroll */
+@media (max-width: 359.98px) {
+  .hero-carousel {
+    --hc-radius: 148px;
+    --hc-face-w: 94px;
+  }
+}
+
 .hc-ring {
   position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   inset: 0;
   display: flex;
   align-items: center;
@@ -1792,6 +1850,10 @@ html.overlay-open { overflow: hidden; }
 
 .hc-overlay {
   position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   inset: 0;
   z-index: 95;
   display: flex;
