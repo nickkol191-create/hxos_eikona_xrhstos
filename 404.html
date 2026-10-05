@@ -5,11 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>404 | Η σελίδα δεν βρέθηκε - Ήχος Εικόνα Χρήστος</title>
   <meta name="robots" content="noindex">
+  <script>
+    /* Ο host σερβίρει αυτή τη σελίδα σε ΚΑΘΕ διεύθυνση που λείπει, σε οποιοδήποτε βάθος
+       (π.χ. /hxos_eikona_xrhstos/en/a/b), οπότε οι σχετικές διαδρομές θα έδειχναν σε λάθος φάκελο.
+       Βρίσκουμε τη ρίζα του site και τη δηλώνουμε με <base> πριν από το CSS, τα εικονίδια,
+       το script και τους συνδέσμους:
+       - GitHub Pages (έργο): η ρίζα είναι /hxos_eikona_xrhstos/
+       - δικό του domain αργότερα: η διαδρομή δεν ξεκινά με το όνομα του repo, άρα ρίζα = /
+         (δεν χρειάζεται καμία αλλαγή στη μετακόμιση)
+       - διπλό κλικ (file://): η σελίδα είναι ήδη στη ρίζα, μένουν οι σχετικές διαδρομές
+       Το CSS γράφεται εδώ (document.write) ώστε να μπλοκάρει το render όπως ένα κανονικό link
+       και να μη ζητηθεί πρώτα από λάθος φάκελο. Χωρίς JS ισχύει το noscript από κάτω. */
+    (function () {
+      var root = '';
+      if (location.protocol !== 'file:') {
+        var repo = '/hxos_eikona_xrhstos/';
+        root = location.pathname.toLowerCase().indexOf(repo) === 0 ? repo : '/';
+      }
+      document.write(
+        (root ? "<base href='" + root + "'>" : '') +
+        '<link rel="stylesheet" href="styles.css">' +
+        '<script src="assets/js/glass.js" defer><\/script>'
+      );
+    })();
+  </script>
+  <noscript><link rel="stylesheet" href="styles.css"></noscript>
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css">
   <style>
-    .err-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: var(--sp-5); }
+    .err-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-5);
+      padding: var(--sp-5);
+    }
     .err-tile { max-width: 34rem; text-align: center; }
     .err-code {
       font-family: var(--font-mono);
@@ -18,6 +50,15 @@
       line-height: 1;
       color: var(--clr-accent);
     }
+    .err-foot {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--sp-2) var(--sp-5);
+      font-size: 0.88rem;
+    }
+    .err-foot a { display: inline-block; padding: 0.5rem 0.25rem; color: rgba(255, 255, 255, 0.88); text-decoration: none; }
+    .err-foot a:hover { color: #fff; text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -34,7 +75,11 @@
         <a class="btn btn-ghost" href="en/index.html" lang="en" hreflang="en">Home (EN)</a>
       </div>
     </div>
+    <footer class="err-foot">
+      <!-- TODO imprint: [ΕΠΩΝΥΜΙΑ], [ΝΟΜΙΚΗ ΜΟΡΦΗ] · ΑΦΜ [ΑΦΜ] · Αρ. ΓΕΜΗ [ΑΡΙΘΜΟΣ ΓΕΜΗ] (στοιχεία πελάτη, εμφανίζονται εδώ μόλις τα επιβεβαιώσει) -->
+      <a href="politiki-aporritou.html">Πολιτική απορρήτου</a>
+      <a href="en/politiki-aporritou.html" lang="en" hreflang="en">Privacy policy</a>
+    </footer>
   </div>
-  <script src="assets/js/glass.js" defer></script>
 </body>
 </html>

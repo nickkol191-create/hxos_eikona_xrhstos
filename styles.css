@@ -1876,3 +1876,48 @@ html.overlay-open { overflow: hidden; }
 @media (prefers-reduced-motion: no-preference) {
   .hc-overlay:not([hidden]) img { animation: photo-in 0.24s ease both; }
 }
+
+/* ============================================================
+   ΠΟΛΙΤΙΚΗ ΑΠΟΡΡΗΤΟΥ: μία στήλη ανάγνωσης, τίτλος και κείμενο
+   στοιχισμένα μαζί, το κείμενο σε θολό λευκό tile
+   ============================================================ */
+
+.legal-col {
+  max-width: 50rem;
+  margin-inline: auto;
+}
+
+.tile.legal { padding: clamp(1.25rem, 4vw, 3rem); }
+
+.legal-date {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--clr-ink-soft);
+  margin-bottom: var(--sp-5);
+}
+
+.legal h2 {
+  font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+  margin-top: clamp(2rem, 5vw, 3rem);
+  margin-bottom: var(--sp-3);
+}
+
+.legal ul {
+  display: grid;
+  gap: var(--sp-1);
+  padding-left: 1.25rem;
+  margin-top: var(--sp-3);
+}
+
+.legal ul + p { margin-top: var(--sp-3); }
+
+/* σκούρο κείμενο με κόκκινη υπογράμμιση: το #9e0b10 πέφτει κάτω από 4.5:1
+   πάνω στο θολό tile όταν από πίσω περνά το σκούρο κόκκινο του φόντου */
+.legal a {
+  color: var(--clr-ink);
+  text-decoration-color: var(--clr-accent-deep);
+  text-decoration-thickness: 1.5px;
+  overflow-wrap: anywhere;
+}
+
+.legal a:hover { color: var(--clr-accent-deep); }
