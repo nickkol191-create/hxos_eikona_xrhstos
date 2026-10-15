@@ -1250,7 +1250,16 @@ a.tile:hover,
   .merge-media .tile-img,
   .merge-media .tile-media { order: 2; }
 
-  .merge-media .tile-img { min-height: clamp(240px, 52vw, 400px); }
+  /* Ολόκληρη η φωτογραφία, χωρίς κόψιμο: φυσική αναλογία, και σε πολύ
+     ψηλές φωτογραφίες (tablet) χωράει ολόκληρη με σκούρο φόντο στα πλάγια. */
+  .merge-media .tile-img { min-height: 0; background: #0f0f12; }
+  .merge-media .tile-img img {
+    position: static;
+    display: block;
+    height: auto;
+    max-height: 75vh;
+    object-fit: contain;
+  }
 }
 
 @media (max-width: 639.98px) {
@@ -1267,8 +1276,6 @@ a.tile:hover,
     border-top-right-radius: 0;
     border-top: 0;
   }
-
-  .merge-media .tile-img { min-height: 240px; }
 }
 
 /* ---- foldable service cards on the homepage (phone only) ------------ */
