@@ -4,7 +4,8 @@
    - inert στο φόντο όσο είναι ανοιχτό overlay (δεν φεύγει το Tab από κάτω)
    - Escape: κλείσιμο / επιστροφή στο άλμπουμ
    - βέλη πληκτρολογίου: προηγούμενη / επόμενη φωτογραφία στο lightbox
-   - επιστροφή του focus στον φάκελο όταν κλείσει το άλμπουμ */
+   - επιστροφή του focus στον φάκελο όταν κλείσει το άλμπουμ
+   - βίντεο: παίζει ένα τη φορά και σταματά όταν κλείσει το άλμπουμ */
 (function () {
   'use strict';
 
@@ -46,8 +47,42 @@
     }
   }
 
+  var videos = document.querySelectorAll('.album video');
+
+  /* ένα βίντεο τη φορά: όταν ξεκινά ένα, τα άλλα σταματούν */
+  Array.prototype.forEach.call(videos, function (v) {
+    v.addEventListener('play', function () {
+      Array.prototype.forEach.call(videos, function (o) {
+        if (o !== v && !o.paused) { o.pause(); }
+      });
+    });
+  });
+
+  function pauseHiddenVideos(open) {
+    Array.prototype.forEach.call(videos, function (v) {
+      if (!v.paused && (!open || !open.contains(v))) { v.pause(); }
+    });
+  }
+
+  /* η ετικέτα τοποθεσίας στο lightbox περιμένει να φορτώσει η φωτογραφία */
+  function watchPhoto(box) {
+    var wrap = box.querySelector('.lb-photo');
+    var img = wrap ? wrap.querySelector('img') : null;
+    if (!img) { return; }
+    if (img.complete && img.naturalWidth) {
+      wrap.classList.remove('is-loading');
+      return;
+    }
+    wrap.classList.add('is-loading');
+    img.addEventListener('load', function () {
+      wrap.classList.remove('is-loading');
+    }, { once: true });
+  }
+
   function sync() {
     var el = overlayFromHash();
+    pauseHiddenVideos(el);
+    if (el && el.classList.contains('lightbox')) { watchPhoto(el); }
 
     docEl.classList.toggle('overlay-open', !!el);
     chrome.forEach(function (c) { setInert(c, !!el); });

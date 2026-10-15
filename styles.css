@@ -1239,27 +1239,36 @@ a.tile:hover,
   #smart-homes .bento .tile-dark { order: 2; }
 }
 
-/* ---- phone only: service photo lives at the bottom of its tile ----- */
+/* ---- service/product photo or video beside its red tab ------------- */
+/* PC: δίπλα στο κόκκινο tab (d7 + d5). Tablet: από κάτω, με κενό.
+   Κινητό: κολλημένο στο κάτω μέρος του tab, σαν ένα ενιαίο tile. */
+
+.merge-media .tile-img { min-height: 260px; }
 
 @media (max-width: 999.98px) {
-  .merge-media .tile:not(.tile-img) { order: 1; }
-  .merge-media .tile-img { order: 2; }
+  .merge-media .tile:not(.tile-img):not(.tile-media) { order: 1; }
+  .merge-media .tile-img,
+  .merge-media .tile-media { order: 2; }
+
+  .merge-media .tile-img { min-height: clamp(240px, 52vw, 400px); }
 }
 
 @media (max-width: 639.98px) {
   .merge-media { gap: 0; }
 
-  .merge-media .tile:not(.tile-img) {
+  .merge-media .tile:not(.tile-img):not(.tile-media) {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  .merge-media .tile-img {
+  .merge-media .tile-img,
+  .merge-media .tile-media {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: 0;
-    min-height: 210px;
   }
+
+  .merge-media .tile-img { min-height: 240px; }
 }
 
 /* ---- foldable service cards on the homepage (phone only) ------------ */
@@ -1441,12 +1450,18 @@ a.tile:hover,
   .folder-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* 6 φάκελοι: 3 + 3 ως τα 1199px, μία σειρά των 6 από 1200px */
 @media (min-width: 1000px) {
-  .folder-grid { grid-template-columns: repeat(5, 1fr); gap: var(--sp-5); }
+  .folder-grid { gap: var(--sp-5); }
+}
+
+@media (min-width: 1200px) {
+  .folder-grid { grid-template-columns: repeat(6, 1fr); }
 }
 
 .folder {
   display: block;
+  height: 100%;
   text-decoration: none;
   color: var(--clr-ink);
   background: rgba(255, 255, 255, 0.68);
@@ -1472,8 +1487,8 @@ a.tile:hover,
 
 .folder-cover {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 6px;
   aspect-ratio: 1;
   overflow: hidden;
@@ -1874,7 +1889,8 @@ html.overlay-open { overflow: hidden; }
 .hc-overlay .lb-close { cursor: pointer; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hc-overlay:not([hidden]) img { animation: photo-in 0.24s ease both; }
+  /* backwards, όχι both: μετά το άνοιγμα η αδιαφάνεια μένει ελεύθερη για το is-loading */
+  .hc-overlay:not([hidden]) img { animation: photo-in 0.24s ease backwards; }
 }
 
 /* ============================================================
@@ -1921,3 +1937,377 @@ html.overlay-open { overflow: hidden; }
 }
 
 .legal a:hover { color: var(--clr-accent-deep); }
+
+/* ============================================================
+   ΑΛΛΑΓΕΣ ΠΕΛΑΤΗ 2026-10-15: βέλη στο overlay του hero, ετικέτα τοποθεσίας,
+   βίντεο στις υπηρεσίες και άλμπουμ βίντεο στη γκαλερί
+   ============================================================ */
+
+/* ---- overlay του hero: προηγούμενη / επόμενη φωτογραφία ------------- */
+
+/* ένας κανόνας για το overlay του hero και το lightbox της γκαλερί, ώστε
+   να μένουν ίδια: σκούρο φόντο, γιατί στο κινητό κάθονται πάνω στη
+   φωτογραφία και πρέπει να διαβάζονται και πάνω σε φωτεινό κτίριο ή ουρανό */
+.hc-overlay .lb-prev,
+.hc-overlay .lb-next,
+.lightbox .lb-prev,
+.lightbox .lb-next {
+  padding: 0;
+  cursor: pointer;
+  background: rgba(15, 15, 18, 0.62);
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hc-overlay .lb-prev:hover,
+  .hc-overlay .lb-next:hover,
+  .lightbox .lb-prev:hover,
+  .lightbox .lb-next:hover { background: var(--clr-accent); }
+}
+
+.hc-overlay .lb-prev:active,
+.hc-overlay .lb-next:active,
+.lightbox .lb-prev:active,
+.lightbox .lb-next:active { background: var(--clr-accent-deep); }
+
+/* swipe: το οριζόντιο σύρσιμο το χειρίζεται το hero-carousel.js, όχι ο
+   browser (αλλιώς σε οθόνες αφής το swipe δεξιά πάει «Πίσω» σελίδα) */
+.hc-overlay { touch-action: pan-y pinch-zoom; }
+
+html.overlay-open { overscroll-behavior-x: none; }
+
+/* όσο φορτώνει η επόμενη φωτογραφία η τρέχουσα μένει αχνή */
+.hc-overlay.is-loading .hc-photo img { opacity: 0.35; }
+/* σκούρο φόντο κάτω από την αχνή φωτογραφία: να μη διαβάζεται η σελίδα από πίσω */
+.hc-overlay.is-loading .hc-photo { background: #0b0606; border-radius: var(--rad-md); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hc-overlay .hc-photo img { transition: opacity 0.15s ease; }
+}
+
+/* από 640px η φωτογραφία αφήνει χώρο στα πλάγια για τα κουμπιά */
+@media (min-width: 640px) {
+  .hc-overlay img { max-width: calc(100vw - 150px); }
+}
+
+/* ---- ετικέτα τοποθεσίας πάνω σε φωτογραφία -------------------------- */
+
+.geo-pin {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: calc(100% - 16px);
+  padding: 4px 10px 4px 6px;
+  border-radius: var(--rad-pill);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(15, 15, 18, 0.74);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: left;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.geo-pin[hidden] { display: none; }
+
+.geo-pin svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.geo-pin span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ο πίνακας της γκαλερί, οι φάκελοι και τα tiles φωτογραφιών κρατούν
+   την ετικέτα μέσα στη φωτογραφία */
+/* (το .hc-face είναι ήδη absolute, άρα κρατάει κι αυτό την ετικέτα) */
+.album-grid a,
+.cover-cell { position: relative; }
+
+/* μικρές όψεις του κυλίνδρου: πιο συμπαγής ετικέτα */
+.hc-face .geo-pin {
+  left: 5px;
+  bottom: 5px;
+  max-width: calc(100% - 10px);
+  padding: 3px 7px 3px 4px;
+  gap: 3px;
+  font-size: 0.62rem;
+  border-radius: 9px;
+  white-space: normal;   /* στο κινητό σπάει σε δύο γραμμές, δεν κόβεται */
+}
+
+.hc-face .geo-pin span { overflow: visible; }
+
+.hc-face .geo-pin svg { width: 11px; height: 11px; }
+
+@media (min-width: 640px) {
+  .hc-face .geo-pin {
+    left: 7px;
+    bottom: 7px;
+    font-size: 0.7rem;
+    padding: 4px 9px 4px 5px;
+    border-radius: var(--rad-pill);
+    white-space: nowrap;
+  }
+
+  .hc-face .geo-pin svg { width: 13px; height: 13px; }
+}
+
+/* πλέγμα άλμπουμ στο κινητό: δύο μικρές στήλες, μόνο η καρφίτσα (όπως
+   στα εξώφυλλα). Το κείμενο μένει για τους αναγνώστες οθόνης. Στη
+   φωτογραφία σε πλήρες μέγεθος φαίνεται ολόκληρη η ετικέτα. */
+@media (max-width: 639.98px) {
+  .album ul .geo-pin {
+    left: 6px;
+    bottom: 6px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .album ul .geo-pin span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* η ετικέτα εμφανίζεται μόνο όταν έχει φορτώσει η φωτογραφία
+   (gallery.js βάζει το is-loading) */
+.lb-photo.is-loading .geo-pin { visibility: hidden; }
+
+/* φωτογραφία σε πλήρες μέγεθος: η ετικέτα κάθεται πάνω στη φωτογραφία */
+.lb-photo,
+.hc-photo {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.lb-photo .geo-pin,
+.hc-photo .geo-pin {
+  left: 12px;
+  bottom: 12px;
+  font-size: 0.85rem;
+  padding: 5px 12px 5px 8px;
+  gap: 5px;
+}
+
+.lb-photo .geo-pin svg,
+.hc-photo .geo-pin svg { width: 16px; height: 16px; }
+
+/* κελί εξωφύλλου φακέλου με καρφίτσα (χωρίς κείμενο, είναι μικρό) */
+.folder-cover .cover-cell {
+  display: block;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--rad-sm);
+}
+
+.cover-pin {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(15, 15, 18, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.cover-pin svg { width: 13px; height: 13px; }
+
+/* ---- βίντεο δίπλα στο tab «Εγκατάσταση συσκευών» -------------------- */
+/* εδώ d6 + d6 (όχι d7 + d5): το κάθετο βίντεο και η λεζάντα χρειάζονται
+   πλάτος για να διαβάζεται το κείμενο δίπλα του */
+
+.tile-video {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-5);
+}
+
+.tile-video .vid-caption { width: 100%; }
+
+.tile-video .vid-caption h3 { margin-bottom: var(--sp-2); }
+
+.tile-video .vid-caption p { font-size: 0.95rem; }
+
+/* κάδρο κινητού: το βίντεο είναι κάθετο 360x640, ποτέ τεντωμένο */
+.vid-frame {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 9 / 16;
+  flex-shrink: 0;
+  border-radius: var(--rad-md);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+}
+
+.vid-frame video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* από tablet και πάνω: βίντεο αριστερά, λεζάντα δεξιά */
+@media (min-width: 640px) {
+  .tile-video {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .tile-video .vid-frame { width: 210px; max-width: 210px; }
+
+  .tile-video .vid-caption { flex: 1; min-width: 0; }
+}
+
+@media (min-width: 640px) and (max-width: 999.98px) {
+  .tile-video .vid-frame { width: 230px; max-width: 230px; }
+}
+
+/* μικρό PC: μισό πλάτος tile, το βίντεο πάνω και η λεζάντα από κάτω */
+@media (min-width: 1000px) and (max-width: 1199.98px) {
+  .tile-video {
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--sp-5);
+  }
+
+  .tile-video .vid-frame { width: 210px; max-width: 210px; }
+
+  .tile-video .vid-caption { flex: none; width: 100%; }
+}
+
+/* κουμπί παύσης / αναπαραγωγής πάνω στο βίντεο */
+.vid-toggle {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(15, 15, 18, 0.7);
+  color: #fff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--speed);
+}
+
+.vid-toggle[hidden] { display: none; }
+
+.vid-toggle svg { width: 20px; height: 20px; }
+
+.vid-toggle .i-play { display: none; }
+.vid-toggle.is-paused .i-play { display: block; }
+.vid-toggle.is-paused .i-pause { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  .vid-toggle:hover { background: var(--clr-accent); border-color: var(--clr-accent); }
+}
+
+.vid-toggle:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* ---- γκαλερί: άλμπουμ βίντεο ---------------------------------------- */
+
+.video-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (min-width: 640px) {
+  .video-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .video-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+.video-grid figure { margin: 0; }
+
+.video-grid .vid-frame {
+  max-width: 320px;
+  margin-inline: auto;
+  border-color: rgba(20, 20, 23, 0.1);
+  box-shadow: 0 8px 20px rgba(20, 20, 23, 0.16);
+}
+
+.video-grid figcaption {
+  max-width: 320px;
+  margin: var(--sp-2) auto 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--clr-ink-soft);
+}
+
+/* πολύ στενά κινητά: μία στήλη, αλλιώς τα κουμπιά του player δεν χωρούν */
+@media (max-width: 359.98px) {
+  .video-grid { grid-template-columns: 1fr; }
+
+  .video-grid .vid-frame,
+  .video-grid figcaption { max-width: 220px; }
+}
+
+/* εξώφυλλο φακέλου βίντεο: σήμα αναπαραγωγής στο κέντρο */
+.folder-cover { position: relative; }
+
+.cover-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* χωρίς margin: το τρίγωνο του path κάθεται ήδη ~1.6px δεξιά από το
+   γεωμετρικό κέντρο, όσο χρειάζεται για να φαίνεται οπτικά κεντραρισμένο */
+.cover-play svg { width: 18px; height: 18px; display: block; }

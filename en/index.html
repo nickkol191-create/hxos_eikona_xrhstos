@@ -96,7 +96,7 @@
               <button class="hc-face" type="button" style="--i: 3" data-full="../assets/photos/IMG_2581.JPEG"><img src="../assets/photos/thumbs/sm/IMG_2581.jpg" srcset="../assets/photos/thumbs/sm/IMG_2581.jpg 360w, ../assets/photos/thumbs/IMG_2581.jpg 720w" sizes="(min-width: 640px) 180px, 112px" fetchpriority="low" alt="Ajax alarm system in white with an outdoor siren" width="540" height="720" decoding="async"></button>
               <button class="hc-face" type="button" style="--i: 4" data-full="../assets/photos/IMG_2571.JPEG"><img src="../assets/photos/thumbs/sm/IMG_2571.jpg" srcset="../assets/photos/thumbs/sm/IMG_2571.jpg 360w, ../assets/photos/thumbs/IMG_2571.jpg 720w" sizes="(min-width: 640px) 180px, 112px" fetchpriority="low" alt="Outdoor LED screen with line array speakers at an event" width="720" height="540" decoding="async"></button>
               <button class="hc-face" type="button" style="--i: 5" data-full="../assets/photos/IMG_2583.JPEG"><img src="../assets/photos/thumbs/sm/IMG_2583.jpg" srcset="../assets/photos/thumbs/sm/IMG_2583.jpg 360w, ../assets/photos/thumbs/IMG_2583.jpg 720w" sizes="(min-width: 640px) 180px, 112px" fetchpriority="low" alt="DJ booth with speakers and a Let's Party neon sign" width="540" height="720" decoding="async"></button>
-              <button class="hc-face" type="button" style="--i: 6" data-full="../assets/photos/IMG_2568.JPEG"><img src="../assets/photos/thumbs/sm/IMG_2568.jpg" srcset="../assets/photos/thumbs/sm/IMG_2568.jpg 360w, ../assets/photos/thumbs/IMG_2568.jpg 720w" sizes="(min-width: 640px) 180px, 112px" fetchpriority="low" alt="Video wall installation in an event hall" width="720" height="540" decoding="async"></button>
+              <button class="hc-face" type="button" style="--i: 6" data-full="../assets/photos/IMG_2568.JPEG" data-place="Athens City Hall"><img src="../assets/photos/thumbs/sm/IMG_2568.jpg" srcset="../assets/photos/thumbs/sm/IMG_2568.jpg 360w, ../assets/photos/thumbs/IMG_2568.jpg 720w" sizes="(min-width: 640px) 180px, 112px" fetchpriority="low" alt="Video wall installation in an event hall" width="720" height="540" decoding="async"><span class="geo-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg><span>Athens City Hall</span></span></button>
               <button class="hc-face" type="button" style="--i: 7" data-full="../assets/photos/IMG_2576.JPEG"><img src="../assets/photos/thumbs/sm/IMG_2576.jpg" srcset="../assets/photos/thumbs/sm/IMG_2576.jpg 360w, ../assets/photos/thumbs/IMG_2576.jpg 720w" sizes="(min-width: 640px) 180px, 112px" fetchpriority="low" alt="Truss towers with lighting and an LED screen in an indoor arena" width="540" height="720" decoding="async"></button>
               <button class="hc-face" type="button" style="--i: 8" data-full="../assets/photos/IMG_2579.JPEG"><img src="../assets/photos/thumbs/sm/IMG_2579.jpg" srcset="../assets/photos/thumbs/sm/IMG_2579.jpg 360w, ../assets/photos/thumbs/IMG_2579.jpg 720w" sizes="(min-width: 640px) 180px, 112px" alt="Building truss towers for an outdoor event at night" width="540" height="720" decoding="async"></button>
               <button class="hc-face" type="button" style="--i: 9" data-full="../assets/photos/IMG_2577.JPEG"><img src="../assets/photos/thumbs/sm/IMG_2577.jpg" srcset="../assets/photos/thumbs/sm/IMG_2577.jpg 360w, ../assets/photos/thumbs/IMG_2577.jpg 720w" sizes="(min-width: 640px) 180px, 112px" alt="Lighting, sound and DJ set at a sports event with a ring" width="720" height="540" decoding="async"></button>
@@ -258,9 +258,16 @@
 
     <!-- full-size overlay for the hero carousel -->
     <div class="hc-overlay" role="dialog" aria-modal="true" aria-label="Full-size photo" hidden>
-      <img src="" alt="">
+      <span class="hc-photo"><img alt=""><span class="geo-pin" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg><span></span></span></span>
       <button class="lb-close" type="button" aria-label="Close">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+      </button>
+      <span class="visually-hidden" aria-live="polite"></span>
+      <button class="lb-prev" type="button" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+      </button>
+      <button class="lb-next" type="button" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
       </button>
     </div>
 

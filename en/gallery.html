@@ -27,13 +27,14 @@
     "description": "Photos from projects and events by Hxos Eikona Xrhstos in Thiva, Greece.",
     "mainEntity": {
       "@type": "ItemList",
-      "name": "Photo albums",
+      "name": "Photo and video albums",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Sound coverage" },
-        { "@type": "ListItem", "position": 2, "name": "LED screens & stages" },
-        { "@type": "ListItem", "position": 3, "name": "Audio & video installations" },
-        { "@type": "ListItem", "position": 4, "name": "Security systems" },
-        { "@type": "ListItem", "position": 5, "name": "Projects across Greece" }
+        { "@type": "ListItem", "position": 1, "name": "Project videos" },
+        { "@type": "ListItem", "position": 2, "name": "Sound coverage" },
+        { "@type": "ListItem", "position": 3, "name": "LED screens & stages" },
+        { "@type": "ListItem", "position": 4, "name": "Audio & video installations" },
+        { "@type": "ListItem", "position": 5, "name": "Security systems" },
+        { "@type": "ListItem", "position": 6, "name": "Projects across Greece" }
       ]
     }
   }
@@ -76,8 +77,22 @@
          in each <span class="folder-name"> here AND in the <h2> of the
          matching album section below. -->
     <section class="section container" aria-labelledby="albums-title" id="albums" tabindex="-1">
-      <h2 id="albums-title" class="visually-hidden">Photo albums</h2>
+      <h2 id="albums-title" class="visually-hidden">Photo and video albums</h2>
       <ul class="folder-grid">
+
+        <li>
+          <a class="folder" href="#al-video">
+            <span class="folder-cover" aria-hidden="true">
+              <img src="../assets/videos/led-screen-thiva-poster.jpg" alt="" loading="lazy" width="320" height="568" decoding="async">
+              <img src="../assets/videos/ceiling-tv-poster.jpg" alt="" loading="lazy" width="360" height="640" decoding="async">
+              <img src="../assets/videos/pool-party-beams-poster.jpg" alt="" loading="lazy" width="320" height="568" decoding="async">
+              <img src="../assets/videos/truss-setup-poster.jpg" alt="" loading="lazy" width="320" height="568" decoding="async">
+              <span class="cover-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.2-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg></span>
+            </span>
+            <span class="folder-name">Project videos</span>
+            <span class="folder-count">5 videos</span>
+          </a>
+        </li>
 
         <li>
           <a class="folder" href="#al-sound">
@@ -108,7 +123,7 @@
         <li>
           <a class="folder" href="#al-install">
             <span class="folder-cover" aria-hidden="true">
-              <img src="../assets/photos/thumbs/sm/IMG_2568.jpg" alt="" loading="lazy" width="720" height="540" decoding="async">
+              <span class="cover-cell"><img src="../assets/photos/thumbs/sm/IMG_2568.jpg" alt="" loading="lazy" width="720" height="540" decoding="async"><span class="cover-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg></span></span>
               <img src="../assets/photos/thumbs/sm/IMG_2582.jpg" alt="" loading="lazy" width="720" height="540" decoding="async">
               <span class="cover-empty"></span>
               <span class="cover-empty"></span>
@@ -134,8 +149,8 @@
         <li>
           <a class="folder" href="#al-projects">
             <span class="folder-cover" aria-hidden="true">
-              <img src="../assets/photos/thumbs/sm/IMG_2566.jpg" alt="" loading="lazy" width="720" height="540" decoding="async">
-              <img src="../assets/photos/thumbs/sm/IMG_2567.jpg" alt="" loading="lazy" width="540" height="720" decoding="async">
+              <span class="cover-cell"><img src="../assets/photos/thumbs/sm/IMG_2566.jpg" alt="" loading="lazy" width="720" height="540" decoding="async"><span class="cover-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg></span></span>
+              <span class="cover-cell"><img src="../assets/photos/thumbs/sm/IMG_2567.jpg" alt="" loading="lazy" width="540" height="720" decoding="async"><span class="cover-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg></span></span>
               <img src="../assets/photos/thumbs/sm/IMG_2573.jpg" alt="" loading="lazy" width="540" height="720" decoding="async">
               <img src="../assets/photos/thumbs/sm/IMG_2574.jpg" alt="" loading="lazy" width="540" height="720" decoding="async">
             </span>
@@ -145,6 +160,73 @@
         </li>
 
       </ul>
+    </section>
+
+    <!-- ===== ALBUM: Project videos ===== -->
+    <section class="album" id="al-video" aria-label="Album: Project videos" tabindex="-1">
+      <div class="album-panel">
+        <header class="album-head">
+          <div>
+            <h2>Project videos</h2>
+            <p class="album-count-line">5 videos</p>
+          </div>
+          <a class="album-close" href="#albums" aria-label="Close album">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg>
+          </a>
+        </header>
+        <ul class="video-grid">
+          <li>
+            <figure>
+              <div class="vid-frame">
+                <video width="320" height="568" poster="../assets/videos/led-screen-thiva-poster.jpg" controls playsinline preload="none" aria-labelledby="vid-led-cap">
+                  <source src="../assets/videos/led-screen-thiva.mp4" type="video/mp4">
+                </video>
+              </div>
+              <figcaption id="vid-led-cap">Municipal event in Thiva, LED screen and audience</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <div class="vid-frame">
+                <video width="320" height="568" poster="../assets/videos/truss-setup-poster.jpg" controls playsinline preload="none" aria-labelledby="vid-truss-cap">
+                  <source src="../assets/videos/truss-setup.mp4" type="video/mp4">
+                </video>
+              </div>
+              <figcaption id="vid-truss-cap">Setting up the stage truss at night</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <div class="vid-frame">
+                <video width="320" height="568" poster="../assets/videos/pool-party-beams-poster.jpg" controls playsinline preload="none" aria-labelledby="vid-pool-cap">
+                  <source src="../assets/videos/pool-party-beams.mp4" type="video/mp4">
+                </video>
+              </div>
+              <figcaption id="vid-pool-cap">Evening pool party with sky beam lights</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <div class="vid-frame">
+                <video width="320" height="568" poster="../assets/videos/sky-beams-poster.jpg" controls playsinline preload="none" aria-labelledby="vid-sky-cap">
+                  <source src="../assets/videos/sky-beams.mp4" type="video/mp4">
+                </video>
+              </div>
+              <figcaption id="vid-sky-cap">Party beam lights sweeping the night sky</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <div class="vid-frame">
+                <video width="360" height="640" poster="../assets/videos/ceiling-tv-poster.jpg" controls playsinline preload="none" aria-labelledby="vid-ceiling-cap">
+                  <source src="../assets/videos/ceiling-tv.mp4" type="video/mp4">
+                </video>
+              </div>
+              <figcaption id="vid-ceiling-cap">Motorized mount lowering a TV from the ceiling</figcaption>
+            </figure>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <!-- ===== ALBUM: Sound coverage ===== -->
@@ -207,7 +289,7 @@
           </a>
         </header>
         <ul class="album-grid">
-          <li><a href="#p68"><img src="../assets/photos/thumbs/IMG_2568.jpg" alt="Video wall installation in an event hall" loading="lazy" width="720" height="540" decoding="async"></a></li>
+          <li><a href="#p68"><img src="../assets/photos/thumbs/IMG_2568.jpg" alt="Video wall installation in an event hall" loading="lazy" width="720" height="540" decoding="async"><span class="geo-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg><span>Athens City Hall</span></span></a></li>
           <li><a href="#p82"><img src="../assets/photos/thumbs/IMG_2582.jpg" alt="Weatherproof garden speaker and spotlight on a lawn" loading="lazy" width="720" height="540" decoding="async"></a></li>
         </ul>
       </div>
@@ -245,8 +327,8 @@
           </a>
         </header>
         <ul class="album-grid">
-          <li><a href="#p66"><img src="../assets/photos/thumbs/IMG_2566.jpg" alt="Company vehicles on a job in central Athens" loading="lazy" width="720" height="540" decoding="async"></a></li>
-          <li><a href="#p67"><img src="../assets/photos/thumbs/IMG_2567.jpg" alt="Company van outside Athens City Hall" loading="lazy" width="540" height="720" decoding="async"></a></li>
+          <li><a href="#p66"><img src="../assets/photos/thumbs/IMG_2566.jpg" alt="Company vehicles on a job in central Athens" loading="lazy" width="720" height="540" decoding="async"><span class="geo-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg><span>Athens City Hall</span></span></a></li>
+          <li><a href="#p67"><img src="../assets/photos/thumbs/IMG_2567.jpg" alt="Company van outside Athens City Hall" loading="lazy" width="540" height="720" decoding="async"><span class="geo-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg><span>Athens City Hall</span></span></a></li>
           <li><a href="#p73"><img src="../assets/photos/thumbs/IMG_2573.jpg" alt="Interior of a modern cultural venue during an event" loading="lazy" width="540" height="720" decoding="async"></a></li>
           <li><a href="#p74"><img src="../assets/photos/thumbs/IMG_2574.jpg" alt="Night view of an event venue with illuminated trees" loading="lazy" width="540" height="720" decoding="async"></a></li>
         </ul>
@@ -337,7 +419,7 @@
 
     <!-- ===== LIGHTBOXES: Audio & video installations ===== -->
     <figure class="lightbox" id="p68" aria-label="Full-size photo" tabindex="-1">
-      <img src="../assets/photos/IMG_2568.JPEG" alt="Video wall installation in an event hall" loading="lazy" width="1600" height="1200" decoding="async">
+      <span class="lb-photo"><img src="../assets/photos/IMG_2568.JPEG" alt="Video wall installation in an event hall" loading="lazy" width="1600" height="1200" decoding="async"><span class="geo-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg><span>Athens City Hall</span></span></span>
       <a class="lb-close" href="#al-install" aria-label="Close, back to album"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></a>
       <a class="lb-prev" href="#p82" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></a>
       <a class="lb-next" href="#p82" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
@@ -365,13 +447,13 @@
 
     <!-- ===== LIGHTBOXES: Projects across Greece ===== -->
     <figure class="lightbox" id="p66" aria-label="Full-size photo" tabindex="-1">
-      <img src="../assets/photos/IMG_2566.JPEG" alt="Company vehicles on a job in central Athens" loading="lazy" width="1600" height="1200" decoding="async">
+      <span class="lb-photo"><img src="../assets/photos/IMG_2566.JPEG" alt="Company vehicles on a job in central Athens" loading="lazy" width="1600" height="1200" decoding="async"><span class="geo-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg><span>Athens City Hall</span></span></span>
       <a class="lb-close" href="#al-projects" aria-label="Close, back to album"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></a>
       <a class="lb-prev" href="#p74" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></a>
       <a class="lb-next" href="#p67" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
     </figure>
     <figure class="lightbox" id="p67" aria-label="Full-size photo" tabindex="-1">
-      <img src="../assets/photos/IMG_2567.JPEG" alt="Company van outside Athens City Hall" loading="lazy" width="1200" height="1600" decoding="async">
+      <span class="lb-photo"><img src="../assets/photos/IMG_2567.JPEG" alt="Company van outside Athens City Hall" loading="lazy" width="1200" height="1600" decoding="async"><span class="geo-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ec0c0d" d="M12 1.8a7.2 7.2 0 0 0-7.2 7.2c0 5.4 7.2 13.2 7.2 13.2s7.2-7.8 7.2-13.2A7.2 7.2 0 0 0 12 1.8Z"/><circle cx="12" cy="9" r="2.7" fill="#fff"/></svg><span>Athens City Hall</span></span></span>
       <a class="lb-close" href="#al-projects" aria-label="Close, back to album"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></a>
       <a class="lb-prev" href="#p66" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></a>
       <a class="lb-next" href="#p73" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
