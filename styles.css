@@ -2242,6 +2242,9 @@ html.overlay-open { overscroll-behavior-x: none; }
 .vid-toggle.is-paused .i-play { display: block; }
 .vid-toggle.is-paused .i-pause { display: none; }
 
+/* γκαλερί: κουμπί πλήρους οθόνης κάτω αριστερά (video.js) */
+.vid-full { right: auto; left: 10px; }
+
 @media (hover: hover) and (pointer: fine) {
   .vid-toggle:hover { background: var(--clr-accent); border-color: var(--clr-accent); }
 }
