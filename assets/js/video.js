@@ -37,6 +37,40 @@
       /* το play() επιστρέφει promise: αν ο browser το αρνηθεί, απλώς
          μένει σε παύση με το κουμπί αναπαραγωγής ορατό */
       if (p && typeof p.catch === 'function') { p.catch(sync); }
+      watch();
+    }
+
+    /* iPhone: το πρώτο play() μπορεί να κολλήσει σε μαύρη οθόνη ενώ το
+       βίντεο λέει ότι παίζει (ο επισκέπτης έπρεπε να πατήσει παύση και ξανά
+       αναπαραγωγή). Αν σε 2,5 δευτ. δεν έχει δείξει καρέ, κάνουμε εμείς
+       αυτό το παύση/αναπαραγωγή, μία φορά. */
+    var watchTimer = null;
+    function watch() {
+      clearTimeout(watchTimer);
+      watchTimer = setTimeout(function () {
+        if (!video.paused && !userPaused && video.readyState < 3) {
+          video.pause();
+          var p = video.play();
+          if (p && typeof p.catch === 'function') { p.catch(sync); }
+        }
+      }, 2500);
+    }
+    video.addEventListener('playing', function () { clearTimeout(watchTimer); });
+
+    /* οι πληροφορίες του βίντεο φορτώνουν λίγο πριν φανεί, όπως στη
+       γκαλερί, ώστε το πρώτο play() να βρίσκει έτοιμο αρχείο */
+    if (video.preload === 'none' && !saveData) {
+      if ('IntersectionObserver' in window) {
+        var warmObs = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            video.preload = 'metadata';
+            warmObs.disconnect();
+          }
+        }, { rootMargin: '600px 0px' });
+        warmObs.observe(video);
+      } else {
+        video.preload = 'metadata';
+      }
     }
 
     function toggle() {
