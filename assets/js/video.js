@@ -32,11 +32,24 @@
       btn.setAttribute('aria-label', btn.getAttribute(paused ? 'data-label-play' : 'data-label-pause'));
     }
 
+    /* iPhone σε Εξοικονόμηση ενέργειας: αρνείται το αυτόματο play() και μετά
+       το πάτημα του επισκέπτη έδειχνε μαύρη οθόνη. Μετά από άρνηση κάνουμε
+       load() μία φορά: το βίντεο ξαναστήνεται καθαρό (με το poster) και το
+       επόμενο πάτημα παίζει κανονικά. */
+    var resetDone = false;
+    function refused(err) {
+      sync();
+      if (!resetDone && err && err.name === 'NotAllowedError') {
+        resetDone = true;
+        video.load();
+      }
+    }
+
     function play() {
       var p = video.play();
       /* το play() επιστρέφει promise: αν ο browser το αρνηθεί, απλώς
          μένει σε παύση με το κουμπί αναπαραγωγής ορατό */
-      if (p && typeof p.catch === 'function') { p.catch(sync); }
+      if (p && typeof p.catch === 'function') { p.catch(refused); }
       watch();
     }
 
