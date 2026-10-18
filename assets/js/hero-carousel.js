@@ -7,7 +7,9 @@
    - η αυτόματη περιστροφή σταματά σε hover/focus (WCAG 2.2.2) και
      όταν ο κύλινδρος είναι εκτός οθόνης, το loop κοιμάται όταν δεν κινείται
    - μέσα στο overlay: προηγούμενη/επόμενη φωτογραφία με τα κουμπιά, τα
-     βέλη του πληκτρολογίου ή swipe, κυκλικά και στις 10 όψεις */
+     βέλη του πληκτρολογίου ή swipe, κυκλικά και στις 10 όψεις
+   - το Πίσω του browser ή του κινητού κλείνει το overlay και μένει στη
+     σελίδα, όπως στη γκαλερί (μία εγγραφή ιστορικού ανά άνοιγμα) */
 (function () {
   'use strict';
 
@@ -269,12 +271,53 @@
     var i = Array.prototype.indexOf.call(faces, lastFace);
     var n = faces.length;
     showFace(faces[(i + dir + n) % n], true);
+    /* η εγγραφή δείχνει πάντα τη φωτογραφία που βλέπει (χωρίς νέα εγγραφή),
+       ώστε μια ανανέωση να ανοίγει αυτήν και όχι την πρώτη */
+    if (historyOn && photoState() !== -1) {
+      try {
+        window.history.replaceState({ hcPhoto: Array.prototype.indexOf.call(faces, lastFace) }, '');
+      } catch (err) { /* χωρίς ιστορικό: τίποτα */ }
+    }
   }
 
-  function openOverlay(face) {
+  /* Πίσω (κουμπί του browser ή χειρονομία του κινητού) κλείνει τη
+     φωτογραφία και μένει στη σελίδα, όπως στη γκαλερί. Κάθε άνοιγμα
+     προσθέτει ΜΙΑ εγγραφή στο ιστορικό (ίδιο URL, μόνο state), τα βήματα
+     μέσα στο overlay καμία. Το κλείσιμο με ✕, Esc ή κλικ στο φόντο βγάζει
+     την εγγραφή με history.back(), ώστε το επόμενο Πίσω να φεύγει κανονικά
+     από τη σελίδα. Αν ο browser αρνηθεί το pushState, μένει η παλιά
+     συμπεριφορά χωρίς ιστορικό. */
+  var historyOn = false;    /* η τρέχουσα εγγραφή του ιστορικού είναι της φωτογραφίας */
+  var backPending = false;  /* ζητήθηκε history.back() και περιμένουμε το popstate του */
+
+  function photoState() {
+    var s = window.history.state;
+    return s && typeof s.hcPhoto === 'number' ? s.hcPhoto : -1;
+  }
+
+  function pushPhoto() {
+    /* backPending: η εγγραφή μπαίνει μόλις έρθει το popstate του κλεισίματος */
+    if (historyOn || backPending) { return; }
+    try {
+      window.history.pushState({ hcPhoto: Array.prototype.indexOf.call(faces, lastFace) }, '');
+      historyOn = true;
+    } catch (err) { /* π.χ. file:// σε κάποιους browsers: χωρίς ιστορικό */ }
+  }
+
+  function dropPhoto() {
+    if (!historyOn) { return; }
+    historyOn = false;
+    if (photoState() === -1) { return; }  /* ποτέ back() έξω από τη δική μας εγγραφή */
+    backPending = true;
+    try { window.history.back(); } catch (err) { backPending = false; }
+  }
+
+  function openOverlay(face, fromHistory) {
     if (overlayLive) { overlayLive.textContent = ''; }  /* στο άνοιγμα μιλά ήδη ο διάλογος */
     showFace(face);
-    openedFace = face;
+    /* από το ιστορικό ο κύλινδρος μπορεί να έχει μηδενιστεί (ανανέωση):
+       στο κλείσιμο ευθυγραμμίζεται πάντα με τη φωτογραφία που είδε */
+    openedFace = fromHistory ? null : face;
     overlay.hidden = false;
     open = true;
     document.documentElement.classList.add('overlay-open');
@@ -283,9 +326,10 @@
     clearTimeout(resumeTimer);
     hovered = false;  /* το overlay καλύπτει τον κύλινδρο */
     if (overlayClose) { overlayClose.focus(); }
+    if (!fromHistory) { pushPhoto(); }
   }
 
-  function closeOverlay() {
+  function closeOverlay(fromHistory) {
     if (!open) { return; }
     overlay.hidden = true;
     open = false;
@@ -318,7 +362,39 @@
     clearTimeout(resumeTimer);
     resumeTimer = setTimeout(function () { resumeHold = false; schedule(); }, RESUME_MS);
     schedule();
+    /* ✕, Esc ή φόντο: βγαίνει και η εγγραφή (με το Πίσω έχει ήδη βγει) */
+    if (!fromHistory) { dropPhoto(); }
   }
+
+  /* η σελίδα ακολουθεί το ιστορικό: Πίσω κλείνει, Μπροστά ξανανοίγει (όπως
+     το #hash της γκαλερί). Τρέχει και στη φόρτωση (ανανέωση πάνω σε εγγραφή
+     φωτογραφίας) και στην επιστροφή από το back/forward cache, ώστε overlay
+     και ιστορικό να συμφωνούν πάντα: ποτέ ανοιχτό χωρίς εγγραφή, ποτέ
+     εγγραφή που χρειάζεται ένα νεκρό Πίσω. */
+  function syncHistory() {
+    var i = photoState();
+    historyOn = i !== -1;
+    if (!historyOn) {
+      closeOverlay(true);
+    } else if (!open) {
+      openOverlay(lastFace || faces[i] || faces[0], true);
+    }
+  }
+
+  window.addEventListener('popstate', function () {
+    if (backPending) {
+      /* το popstate του δικού μας history.back(): αν στο μεταξύ άνοιξε
+         ξανά φωτογραφία, τώρα παίρνει την εγγραφή της */
+      backPending = false;
+      if (open) { pushPhoto(); }
+      return;
+    }
+    syncHistory();
+  });
+
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) { backPending = false; syncHistory(); }
+  });
 
   Array.prototype.forEach.call(faces, function (face) {
     face.addEventListener('click', function (e) {
@@ -397,5 +473,6 @@
   });
 
   render();
+  syncHistory();
   schedule();
 })();

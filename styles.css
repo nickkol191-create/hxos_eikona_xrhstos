@@ -131,10 +131,15 @@ p  { max-width: 65ch; }
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.16em;
-  text-transform: uppercase;
   color: var(--clr-accent-deep);
   margin-bottom: var(--sp-3);
 }
+
+/* κεφαλαία με CSS μόνο στα αγγλικά. Στις ελληνικές σελίδες οι ετικέτες
+   (.eyebrow, .stat span, .compare thead th, .site-footer h4) γράφονται
+   κεφαλαία με το χέρι στο HTML, χωρίς τόνους: το text-transform κρατά
+   τους τόνους σε Safari/iOS και όπου λείπει το lang="el" */
+.eyebrow:lang(en) { text-transform: uppercase; }
 
 .eyebrow::before {
   content: "";
@@ -519,9 +524,10 @@ a.tile:hover,
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--clr-on-dark-soft);
 }
+
+.stat span:lang(en) { text-transform: uppercase; }
 
 .tile:not(.tile-dark) .stat span { color: var(--clr-ink-soft); }
 
@@ -641,9 +647,10 @@ a.tile:hover,
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--clr-ink-soft);
 }
+
+.compare thead th:lang(en) { text-transform: uppercase; }
 
 .compare tbody th { font-weight: 600; }
 
@@ -837,9 +844,10 @@ a.tile:hover,
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.14em;
-  text-transform: uppercase;
   margin-bottom: var(--sp-4);
 }
+
+.site-footer h4:lang(en) { text-transform: uppercase; }
 
 .site-footer ul { display: grid; gap: var(--sp-2); }
 
